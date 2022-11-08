@@ -10,8 +10,8 @@ def create
   list = List.new(list_params)
   # データをデータベースに保存するためのsaveメソッドを実行
   list.save
-  # トップ画面へリダイレクト
-  redirect_to '/top'
+  # 詳細画面へリダイレクト
+  redirect_to list_path(list.id)
 end
 
   def index
@@ -19,6 +19,8 @@ end
   end
 
   def show
+    # List.all とは違い、findメソッドは引数を受け取り、idカラムと引数を比べてレコードを取得してくるメソッド
+    @list = List.find(params[:id])
   end
 
   def edit
