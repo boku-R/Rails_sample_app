@@ -7,11 +7,16 @@ class ListsController < ApplicationController
 # 投稿を保存するためのcreateアクションを作成
 def create
   # データを受け取り新規登録するためのインスタンス作成
-  list = List.new(list_params)
+  @list = List.new(list_params)
   # データをデータベースに保存するためのsaveメソッドを実行
-  list.save
-  # 詳細画面へリダイレクト
-  redirect_to list_path(list.id)
+  # saveメソッドで、対象カラムにデータが入力されている→true　されてない→false
+  if @list.save
+    # 詳細画面へリダイレクト
+    redirect_to list_path(list.id)
+  else
+    # render:アクション名で、同じコントローラ内の別アクションのviewを表示できる
+    render :new
+  end
 end
 
   def index
