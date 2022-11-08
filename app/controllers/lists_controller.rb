@@ -26,17 +26,17 @@ end
   def edit
     @list = List.find(params[:id])
   end
-  
+
   # 更新作業(新たなビューは不要)
   def update
     list = List.find(params[:id])
     list.update(list_params)
     redirect_to list_path(list.id)
-  end 
-  
+  end
+
   private
   # ストロングパラメータ
   def list_params
-    params.require(:list).permit(:title,:body)
+    params.require(:list).permit(:title,:body,:image)
   end
 end
